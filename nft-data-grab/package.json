@@ -1,0 +1,35 @@
+{
+    "name": "nft",
+    "version": "1.0.0",
+    "scripts": {},
+    "dependencies": {
+        "mysql": "^2.18.1",
+        "node-fetch": "^2.6.1"
+    },
+    "devDependencies": {},
+    "browserslist": [
+        "> 1%",
+        "last 2 versions"
+    ],
+    "engines": {
+        "node": ">=8.9",
+        "npm": ">= 3.0.0"
+    },
+    "keywords": [],
+    "license": "MIT",
+    "lint-staged": {
+        "src/**/*.{js,vue}": [
+            "eslint --fix",
+            "git add"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PanJiaChen/vue-element-admin.git"
+    }
+}
