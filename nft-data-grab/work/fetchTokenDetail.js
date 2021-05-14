@@ -2,7 +2,7 @@ const { off } = require("process");
 var mysqlQuery = require("../db/mysqlQuery");
 var openseaApi = require("../opensea/api");
 
-const batchCountPerTokenBatch = 100;
+const batchCountPerTokenBatch = 10;
 
 
 
@@ -25,14 +25,27 @@ let run = async function () {
             if (tokenList && tokenList.length > 0) {
                 console.log(tokenList);
 
-                for (let index = 0; index < tokenList.length; index++) {
-                    const token = tokenList[index];
-                    var token_id = token.token_id;
-                    var tokenAsset = await retrieveOpenSea(asset_contract_address, token_id);
-                    if (tokenAsset) {
+                var token_id_array = [];
+                tokenList.forEach(element => {
+                    token_id_array.push(element.token_id);
+                });
+                var tokenAssetsResp = await retrieveOpenSea(asset_contract_address, token_id_array);
+                if (tokenAssetsResp && tokenAssetsResp.assets) {
+                    var tokenAssets = tokenAssetsResp.assets;
+                    tokenAssets.forEach(tokenAsset => {
                         saveTokenAssetData(nft_contract_id, tokenAsset);
-                        updateTokenRetrieveStatus(token.id);
-                    }
+                        var token_id = tokenAsset.token_id;
+                        var rowId = 0;
+                        for (let index = 0; index < tokenList.length; index++) {
+                            const row = tokenList[index];
+                            if (token_id == row.token_id) {
+                                rowId = row.id;
+                                updateTokenRetrieveStatus(rowId);
+                                break;
+                            }
+                        }
+                    });
+
                 }
             }
             else {
@@ -144,13 +157,13 @@ function saveTokenAssetData(nft_contract_id, asset) {
 }
 
 
-function retrieveOpenSea(asset_contract_address, token_id) {
+function retrieveOpenSea(asset_contract_address, token_id_array) {
 
-    console.log("retrieveOpenSea: ", asset_contract_address, "\t", token_id);
+    console.log("retrieveOpenSea: ", asset_contract_address, "\t", token_id_array);
 
     var promise = new Promise(function (resolve, reject) {
 
-        openseaApi.getSingleAsset(asset_contract_address, token_id).then((json) => {
+        openseaApi.getAssetsByBatch(asset_contract_address, token_id_array).then((json) => {
 
             var asset = json;
             if (asset) {
