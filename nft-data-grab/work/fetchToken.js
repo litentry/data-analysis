@@ -4,6 +4,7 @@ var theGraphApi = require("../thegraph/api");
 
 const batchCountPerCallTheGraph = 50;
 
+
 mysqlQuery.queryNftContracts().then((d) => {
     if (!d) { return; }
 
