@@ -2,7 +2,7 @@
 var mysql = require('mysql');
 //create mysql connection pool
 var pool = mysql.createPool({
-    host: '150.158.194.183',
+    host: '127.0.0.1',
     user: 'root',
     password: 'Mysql-2019',
     database: 'nftsea',

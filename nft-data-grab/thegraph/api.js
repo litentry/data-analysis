@@ -1,17 +1,28 @@
 const fetch = require('node-fetch');
 
 
+
+// kittyOwners
+// https://api.thegraph.com/subgraphs/name/cuinf/cryptokitties
+
+// polkamonOwners
+// https://api.thegraph.com/subgraphs/name/cuinf/polkamon
+
+// nftOwners
+// https://api.thegraph.com/subgraphs/name/cuinf/zedhorse
+
+
 //https://thegraph.com/explorer/subgraph/cuinf/cryptokitties?selected=playground
 //https://api.thegraph.com/subgraphs/name/cuinf/cryptokitties
 //POST
 // query: "{↵  kittyOwners(first: 100, orderBy: tokenId, ↵    orderDirection: asc, where: {tokenId_gt: 800000}) {↵    ↵    owner↵    tokenId↵    contract↵  }↵}↵"
 // variables: null 
 
-exports.kittyOwners = function (asset_contract_address, startTokenId, batchCountPerCallTheGraph, callback) {
+exports.callApi = function (apiUrl, apiName, asset_contract_address, startTokenId, batchCountPerCallTheGraph, callback) {
 
-  const url = 'https://api.thegraph.com/subgraphs/name/cuinf/cryptokitties';
+  const url = apiUrl;
   const params = {
-    query: "{  kittyOwners(first: " + batchCountPerCallTheGraph + ", orderBy: tokenId,  orderDirection: asc, where: { tokenId_gt: " + startTokenId + " }) {   owner    tokenId    contract  } }",
+    query: "{  " + apiName + "(first: " + batchCountPerCallTheGraph + ", orderBy: tokenId,  orderDirection: asc, where: { tokenId_gt: " + startTokenId + " }) {   owner    tokenId    contract  } }",
     variables: null
   }
   const options = {

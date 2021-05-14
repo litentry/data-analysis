@@ -18,19 +18,18 @@ mysqlQuery.queryNftContracts((d) => {
         var asset_contract_address = c.address;
         var nft_contract_id = c.id;
         var startTokenId = nft_object_token_id_max;
+        var apiUrl = c.apiUrl;
+        var apiName = c.apiName;
         //retrieve 
-        retrieveTheGraph(nft_contract_id, asset_contract_address, startTokenId, batchCountPerCallTheGraph);
+        retrieveTheGraph(apiUrl, apiName, nft_contract_id, asset_contract_address, startTokenId, batchCountPerCallTheGraph);
 
     })
 });
 
-function retrieveTheGraph(nft_contract_id, asset_contract_address, startTokenId, batchCountPerCallTheGraph) {
-    console.log("run retrieveTheGraph: ", asset_contract_address, "\t", startTokenId, '\t', batchCountPerCallTheGraph);
+function retrieveTheGraph(apiUrl, apiName, nft_contract_id, asset_contract_address, startTokenId, batchCountPerCallTheGraph) {
+    console.log("run retrieveTheGraph: ", apiUrl, "\t", apiName, "\t", asset_contract_address, "\t", startTokenId, '\t', batchCountPerCallTheGraph);
 
-    updateContractMaxTokenId(nft_contract_id, startTokenId);
-
-
-    theGraphApi.kittyOwners(asset_contract_address, startTokenId, batchCountPerCallTheGraph, (json) => {
+    theGraphApi.callApi(apiUrl, apiName, asset_contract_address, startTokenId, batchCountPerCallTheGraph, (json) => {
 
         // {
         //     "data": {
@@ -49,15 +48,20 @@ function retrieveTheGraph(nft_contract_id, asset_contract_address, startTokenId,
             var distinctTokenIds = Array.from(new Set(arr));
             console.log("distinctTokenIds:", distinctTokenIds);
             saveTokenIds(nft_contract_id, distinctTokenIds);
+
+            var maxTokeId = distinctTokenIds[distinctTokenIds.length - 1];
+            updateContractMaxTokenId(nft_contract_id, maxTokeId);
+
             if (data.kittyOwners.length < batchCountPerCallTheGraph) {
                 //stop
                 console.log("fetch count < batchCountPerCallTheGraph, reach the end and stop retrieve");
                 return;
             } else {
-                var maxTokeId = distinctTokenIds[distinctTokenIds.length - 1];
                 startTokenId = maxTokeId;
-                retrieveTheGraph(nft_contract_id, asset_contract_address, startTokenId, batchCountPerCallTheGraph);
+                retrieveTheGraph(apiUrl, apiName, nft_contract_id, asset_contract_address, startTokenId, batchCountPerCallTheGraph);
             }
+        } else {
+            console.log("fetch no data , stop retrieve");
         }
     });
 
