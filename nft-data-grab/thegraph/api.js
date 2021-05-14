@@ -18,29 +18,38 @@ const fetch = require('node-fetch');
 // query: "{↵  kittyOwners(first: 100, orderBy: tokenId, ↵    orderDirection: asc, where: {tokenId_gt: 800000}) {↵    ↵    owner↵    tokenId↵    contract↵  }↵}↵"
 // variables: null 
 
-exports.callApi = function (apiUrl, apiName, asset_contract_address, startTokenId, batchCountPerCallTheGraph, callback) {
+exports.callApi = function (apiUrl, apiName, asset_contract_address, startTokenId, batchCountPerCallTheGraph) {
 
-  const url = apiUrl;
-  const params = {
-    query: "{  " + apiName + "(first: " + batchCountPerCallTheGraph + ", orderBy: tokenId,  orderDirection: asc, where: { tokenId_gt: " + startTokenId + " }) {   owner    tokenId    contract  } }",
-    variables: null
-  }
-  const options = {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(params),
-  };
+  var promise = new Promise(function (resolve, reject) {
+    const url = apiUrl;
+    const params = {
+      query: "{  " + apiName + "(first: " + batchCountPerCallTheGraph + ", orderBy: tokenId,  orderDirection: asc, where: { tokenId_gt: " + startTokenId + " }) {   owner    tokenId    contract  } }",
+      variables: null
+    }
+    const options = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    };
+    console.log(options.body);
 
-  fetch(url, options)
-    .then(res => res.json())
-    .then(json => {
-      //console.log(json); 
-      if (callback) {
-        callback(json)
+    fetch(url, options)
+      .then(res => res.json())
+      .then(json => {
+        // console.log(json); 
+        resolve(json);
+
+      })
+      .catch(err => {
+        console.error('error:' + err);
+        reject(err);
       }
-    })
-    .catch(err => console.error('error:' + err));
+      );
+
+  });
+  return promise;
+
 }
 
