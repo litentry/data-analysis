@@ -56,6 +56,7 @@ function retrieveTheGraph(apiUrl, apiName, nft_contract_id, asset_contract_addre
                 if (data[apiName].length < batchCountPerCallTheGraph) {
                     //stop
                     console.log(apiName, "fetch count < batchCountPerCallTheGraph, reach the end and stop retrieve");
+                    process.exitCode = 1;
                     return;
                 } else {
                     startTokenId = maxTokeId;
@@ -63,6 +64,7 @@ function retrieveTheGraph(apiUrl, apiName, nft_contract_id, asset_contract_addre
                 }
             } else {
                 console.log(apiName, "fetch no data , stop retrieve");
+                process.exitCode = 1;
             }
 
         }, function (error) {
