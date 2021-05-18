@@ -1,0 +1,20 @@
+# The general entities for nft tokens.
+type NftOwner @entity {
+  id: ID! #entity id
+  tokenId: BigInt! #token id
+  owner: Bytes! #owner of the token
+  contract: Bytes! #contract address
+}
+
+type NftBalance @entity {
+  id: ID!
+  amount: BigInt!
+  totalSupply: BigInt!
+}
+
+type TransferTrace @entity{
+  id: ID! #entity id
+  from: Bytes! #from address
+  to: Bytes! #to address
+  timestamp: BigInt! #timestamp of the transfer action
+}
