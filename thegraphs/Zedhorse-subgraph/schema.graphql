@@ -1,4 +1,3 @@
-# The general entities for nft tokens.
 type NftOwner @entity {
   id: ID! #entity id
   tokenId: BigInt! #token id
@@ -7,9 +6,9 @@ type NftOwner @entity {
 }
 
 type NftBalance @entity {
-  id: ID!
-  amount: BigInt!
-  totalSupply: BigInt!
+  id: ID! #owner id
+  amount: BigInt! #the amount of the token hold by the owner
+  totalSupply: BigInt! #the total supply of the token
 }
 
 type TransferTrace @entity{
