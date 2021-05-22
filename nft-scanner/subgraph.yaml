@@ -3,6 +3,26 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
+    name: Zedhorse
+    network: matic
+    source:
+      address: "0xa5f1ea7df861952863df2e8d1312f7305dabf215"
+      abi: Zedhorse
+      startBlock: 4605167
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: Zedhorse
+          file: ./abis/Zedhorse.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/ZedhorseMapping.ts
+  - kind: ethereum/contract
     name: CryptoSkulls
     network: mainnet
     source:
@@ -702,3 +722,103 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/FlowerMapping.ts
+  - kind: ethereum/contract
+    name: CosmoMasks
+    network: "0x0580ae26963230bfbd2a775ff0afa937fd157774"
+    source:
+      address: "12037380"
+      abi: CosmoMasks
+      startBlock: .nan
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: CosmoMasks
+          file: ./abis/CosmoMasks.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/CosmoMasksMapping.ts
+  - kind: ethereum/contract
+    name: OVRLand
+    network: "0x56b80bbee68932a8d739315c79bc7b125341098a"
+    source:
+      address: "11366848"
+      abi: OVRLand
+      startBlock: .nan
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: OVRLand
+          file: ./abis/OVRLand.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/OVRLandMapping.ts
+  - kind: ethereum/contract
+    name: NFTeggSeries
+    network: "0x10a7ecf97c46e3229fe1b801a5943153762e0cf0"
+    source:
+      address: "11166980"
+      abi: NFTeggSeries
+      startBlock: .nan
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: NFTeggSeries
+          file: ./abis/NFTeggSeries.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/NFTeggSeriesMapping.ts
+  - kind: ethereum/contract
+    name: CryptoFlowers
+    network: "0x8bc67d00253fd60b1afcce88b78820413139f4c6"
+    source:
+      address: "6822884"
+      abi: CryptoFlowers
+      startBlock: .nan
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: CryptoFlowers
+          file: ./abis/CryptoFlowers.json
+      eventHandlers:
+        - event: Transfer(address,address,uint256)
+          handler: handleTransfer
+      file: ./src/CryptoFlowersMapping.ts
+  - kind: ethereum/contract
+    name: MARBLE_NFT
+    network: "0x1d963688fe2209a98db35c67a041524822cf04ff"
+    source:
+      address: "8060542"
+      abi: MARBLE_NFT
+      startBlock: .nan
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: MARBLE_NFT
+          file: ./abis/MARBLE_NFT.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/MARBLE_NFTMapping.ts
