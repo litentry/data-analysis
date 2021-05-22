@@ -1,6 +1,12 @@
 type TokenHolder @entity {
-  id: ID!
-  contract: Bytes!
-  tokenId: BigInt!
-  owner: Bytes!
+  id: ID! #entity id
+  contract: Bytes! #contract address
+  tokenId: BigInt! #token id
+  owner: Bytes! #owner of the token
+}
+
+type TokenBalance @entity {
+  id: ID! #owner address
+  amount: BigInt! #the amount of the token
+  totalSupply: BigInt! #the total supply of the token 
 }
