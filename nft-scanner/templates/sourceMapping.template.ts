@@ -19,4 +19,10 @@ export function handleTransfer(event: Transfer): void {
   entity.owner = event.params.{{ eventParams_to }};
 
   entity.save();
+  
+  let contract = {{ contract_name }}.bind(event.address)
+  let tokenBalance = new TokenBalance(event.params.{{ eventParams_to }}.toHex());
+  tokenBalance.amount = contract.balanceOf(event.params.{{ eventParams_to }})
+  tokenBalance.totalSupply = contract.totalSupply()
+  tokenBalance.save()
 }
