@@ -15,8 +15,15 @@ async function loadABI(contractAddress) {
   const abi = resp.data;
   return abi;
 }
+
+/// Write ABI to a given directory
 function writeABI(path, abi) {
   fs.writeFileSync(path, JSON.stringify(abi));
+}
+
+///Read ABI from a given path
+function readABI(path) {
+  return JSON.parse(fs.readFileSync(path, 'utf8'));
 }
 
 /// Source code
@@ -109,16 +116,23 @@ async function run(contract) {
   contract['abi_name'] = contract.name;
   contract['abi_file_path'] = `./abis/${contract.name}.json`;
   contract['source_file_path'] = `./src/${contract.name}Mapping.ts`;
-  /// Load ABI from etherscan
+  
   console.log(`Loading *${contract.name}[${contract.address}]* ABI...`);
-  const abi = await loadABI(contract.address);
+  var abi = null;
+  // Load ABI from etherscan
+  if (contract.network == 'mainnet') { //write ABI currently only available in ethereum network mainnet
+    abi = await loadABI(contract.address);
+    writeABI(contract.abi_file_path, abi);
+  } else { //use manually stored abis for other networks for now, TODO: available apis to get ABI from other networks?
+    abi = readABI(contract.abi_file_path);
+  }
+  
   const interface = _.find(abi, { name: 'Transfer', type: 'event' });
   console.log(`Interface: ${util.inspect(interface, { showhidden: false, depth: null })}`);
   if (_.isEmpty(interface)) {
     throw new Error(`Event *Transfer* not found`);
   }
 
-  writeABI(contract.abi_file_path, abi);
   const [handler, event] = getEventHandlerPair(interface.name, interface.inputs);
   contract.eventHandlers = [{ handler, event }];
 
