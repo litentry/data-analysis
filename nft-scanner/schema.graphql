@@ -5,8 +5,8 @@ type TokenHolder @entity {
   owner: Bytes! #owner of the token
 }
 
-type TokenBalance @entity {
-  id: ID! #owner address
-  amount: BigInt! #the amount of the token
-  totalSupply: BigInt! #the total supply of the token 
-}
+# type TokenBalance @entity {
+#  id: ID! #owner address
+#  amount: BigInt! #the amount of the token
+#  totalSupply: BigInt! #the total supply of the token 
+#}
