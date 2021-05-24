@@ -129,11 +129,14 @@ function getTransferEventParamsMapping(inputs) {
 async function run(contract) {
   if (contract.network != 'matic') {//TODO: need to check to automatically load abi from matic too if possible
     contract['abi_name'] = contract.name;
-    contract['abi_file_path'] = `./abis/${contract.name}.json`;
-    contract['source_file_path'] = `./src/${contract.name}Mapping.ts`;
+    contract['abi_file_path'] = `./abis/${contract.name}.json`; 
   } else {//for now, use the erc721 standard one for matic
     contract['abi_name'] = 'ERC721';
     contract['abi_file_path'] = './abis/ERC721.json';
+  } 
+  if (contract.mapping_name == 'mapping' && contract.network != 'matic') {
+    contract['source_file_path'] = `./src/${contract.name}Mapping.ts`;
+  } else {
     contract['source_file_path'] = `./src/${contract.mapping_name}.ts`;
   } 
 
