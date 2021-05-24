@@ -1,29 +1,29 @@
-import { Transfer, ERC721 } from '../generated/Zedhorse/ERC721'
-import { NftOwner, NftBalance, TransferTrace } from '../generated/schema'
+import { log, BigInt } from '@graphprotocol/graph-ts';
+import { TokenHolder } from "../generated/schema";
+import {
+  Transfer,
+  ERC721
+} from '../generated/CryptoSkulls/ERC721';
 
 export function handleTransfer(event: Transfer): void {
-    let id = event.address.toHex() + '#' + event.params.tokenId.toHex()
-    let nftOwner = NftOwner.load(id)
-    if (nftOwner == null) {
-        nftOwner = new NftOwner(id)
-    }
-    nftOwner.tokenId = event.params.tokenId
-    nftOwner.owner = event.params.to
-    nftOwner.contract = event.address
-    nftOwner.save()
-    
-    //update the amount ot the token 
-    let contract = ERC721.bind(event.address)
-    let nftBalance = new NftBalance(event.params.to.toHex())
-    nftBalance.amount = contract.balanceOf(event.params.to)
-    nftBalance.totalSupply = contract.totalSupply()
-    nftBalance.save()
-    
-    //collect the entities of transfer traces
-    // let transferEntity = new TransferTrace(event.transaction.hash.toHex())
-    // transferEntity.from = event.params.from
-    // transferEntity.to = event.params.to
-    // transferEntity.timestamp = event.block.timestamp
-    // transferEntity.save()
-    
+  let id = event.address.toHex() + '#' + event.params.tokenId.toHex();
+
+  log.info('Handle transfer: id: {}, address: {}, tokenId: {}', [id, event.address.toString(), event.params.tokenId.toString()]);
+
+  let entity = TokenHolder.load(id);
+  if (entity == null) {
+    entity = new TokenHolder(id);
+  }
+
+  entity.contract = event.address;
+  entity.tokenId = event.params.tokenId;
+  entity.owner = event.params.to;
+
+  entity.save();
+  
+  // let contract = ERC721.bind(event.address)
+  // let tokenBalance = new TokenBalance(event.params.to.toHex());
+  // tokenBalance.amount = contract.balanceOf(event.params.to)
+  // tokenBalance.totalSupply = contract.totalSupply()
+  // tokenBalance.save()
 }
