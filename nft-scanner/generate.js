@@ -115,7 +115,11 @@ function getTransferEventParamsMapping(inputs) {
 
 async function run(contract) {
   contract['abi_name'] = contract.name;
-  contract['abi_file_path'] = `./abis/${contract.name}.json`;
+  if (contract.mapping_name == 'mapping') {//when a shared mapping is used
+    contract['abi_file_path'] = './abis/ERC721.json';
+  } else {
+    contract['abi_file_path'] = `./abis/${contract.name}.json`;
+  } 
   contract['source_file_path'] = `./src/${contract.mapping_name}.ts`;
   // Load ABI 
   console.log(`Loading *${contract.name}[${contract.address}]* ABI...`);
