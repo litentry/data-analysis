@@ -6,12 +6,25 @@ const csv = require('csv-parser');
 const yaml = require('js-yaml');
 var isMappingGenerated = false;
 
-/// Load ABI from etherscan
-async function loadABI(contractAddress) {
-  const config = {
-    method: 'get',
-    url: `https://api.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}&format=raw`,
-  };
+/// Load ABI 
+async function loadABI(contractAddress, network) {
+  var config;
+  switch (network) {
+    case 'mainnet':
+      config = {
+        method: 'get',
+        url: `https://api.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}&format=raw`,
+      };
+      break;
+    case 'bsc':
+      config = {
+        method: 'get',
+        url: `https://api.bscscan.com/api?module=contract&action=getabi&address=${contractAddress}&format=raw`,
+      }
+      break;
+    case 'matic'://TODO: check the api
+
+  }
   const resp = await axios(config);
   const abi = resp.data;
   return abi;
@@ -114,19 +127,21 @@ function getTransferEventParamsMapping(inputs) {
 }
 
 async function run(contract) {
-  if (contract.mapping_name == 'mapping') {//when a shared mapping is used
-    contract['abi_name'] = 'ERC721';
-    contract['abi_file_path'] = './abis/ERC721.json';
-  } else {
+  if (contract.network != 'matic') {//TODO: need to check to automatically load abi from matic too if possible
     contract['abi_name'] = contract.name;
     contract['abi_file_path'] = `./abis/${contract.name}.json`;
+    contract['source_file_path'] = `./src/${contract.name}Mapping.ts`;
+  } else {//for now, use the erc721 standard one for matic
+    contract['abi_name'] = 'ERC721';
+    contract['abi_file_path'] = './abis/ERC721.json';
+    contract['source_file_path'] = `./src/${contract.mapping_name}.ts`;
   } 
-  contract['source_file_path'] = `./src/${contract.mapping_name}.ts`;
+
   // Load ABI 
   console.log(`Loading *${contract.name}[${contract.address}]* ABI...`);
   var abi = null;
-  if (contract.mapping_name != 'mapping' && contract.network == 'mainnet') { //write ABI currently only available in ethereum network mainnet
-    abi = await loadABI(contract.address);
+  if (contract.mapping_name != 'mapping' && contract.network != 'matic') { //load ABI for mainnet and bsc
+    abi = await loadABI(contract.address, contract.network);
     writeABI(contract.abi_file_path, abi);
   } else { //use manually stored abis for other networks for now, TODO: available apis to get ABI from other networks?
     abi = readABI(contract.abi_file_path);
@@ -142,7 +157,9 @@ async function run(contract) {
 
   //// Generate mapping source codes 
   if (!isMappingGenerated) {
-    isMappingGenerated = true; //only allow to generate once for the common mapping file
+    if (contract.network == 'matic') {
+      isMappingGenerated = true; //only allow to generate once for the common mapping file
+    }
     const sourceTemplatePath = './templates/sourceMapping.template.ts';
     const eventParamsMapping = getTransferEventParamsMapping(interface.inputs);
     const source = generateSource(sourceTemplatePath, contract.name, eventParamsMapping);
