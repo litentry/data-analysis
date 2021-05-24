@@ -125,27 +125,24 @@ async function run(contract) {
   // Load ABI 
   console.log(`Loading *${contract.name}[${contract.address}]* ABI...`);
   var abi = null;
-  if (contract.network == 'mainnet') { //write ABI currently only available in ethereum network mainnet
+  if (contract.mapping_name != 'mapping' && contract.network == 'mainnet') { //write ABI currently only available in ethereum network mainnet
     abi = await loadABI(contract.address);
     writeABI(contract.abi_file_path, abi);
   } else { //use manually stored abis for other networks for now, TODO: available apis to get ABI from other networks?
     abi = readABI(contract.abi_file_path);
   }
   
-
+  const interface = _.find(abi, { name: 'Transfer', type: 'event' });
+  console.log(`Interface: ${util.inspect(interface, { showhidden: false, depth: null })}`);
+  if (_.isEmpty(interface)) {
+    throw new Error(`Event *Transfer* not found`);
+  }
+  const [handler, event] = getEventHandlerPair(interface.name, interface.inputs);
+  contract.eventHandlers = [{ handler, event }];
 
   //// Generate mapping source codes 
   if (!isMappingGenerated) {
     isMappingGenerated = true; //only allow to generate once for the common mapping file
-
-    const interface = _.find(abi, { name: 'Transfer', type: 'event' });
-    console.log(`Interface: ${util.inspect(interface, { showhidden: false, depth: null })}`);
-    if (_.isEmpty(interface)) {
-      throw new Error(`Event *Transfer* not found`);
-    }
-    const [handler, event] = getEventHandlerPair(interface.name, interface.inputs);
-    contract.eventHandlers = [{ handler, event }];
-
     const sourceTemplatePath = './templates/sourceMapping.template.ts';
     const eventParamsMapping = getTransferEventParamsMapping(interface.inputs);
     const source = generateSource(sourceTemplatePath, contract.name, eventParamsMapping);
