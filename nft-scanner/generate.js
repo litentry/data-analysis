@@ -59,7 +59,7 @@ function loadSubgraphDataSourceTemplate(path) {
   return dataSourceTemplate;
 }
 
-function assignDataSouroce(dataSourceTemplate, contract) {
+function assignDataSource(dataSourceTemplate, contract) {
   const cloned = _.cloneDeep(dataSourceTemplate);
   cloned['name'] = contract['name'];
   cloned['network'] = contract['network'];
@@ -135,16 +135,16 @@ async function run(contract) {
   const [handler, event] = getEventHandlerPair(interface.name, interface.inputs);
   contract.eventHandlers = [{ handler, event }];
 
-  //// Generate mapping source codes
-  const sourceTemplatePath = './templates/sourceMapping.template.ts';
-  const eventParamsMapping = getTransferEventParamsMapping(interface.inputs);
-  const source = generateSource(sourceTemplatePath, contract.name, eventParamsMapping);
-  writeSource(contract.source_file_path, source);
+  //// Generate mapping source codes --DO NOT NEEDED, USE A COMMON MAPPING
+  // const sourceTemplatePath = './templates/sourceMapping.template.ts';
+  // const eventParamsMapping = getTransferEventParamsMapping(interface.inputs);
+  // const source = generateSource(sourceTemplatePath, contract.name, eventParamsMapping);
+  // writeSource(contract.source_file_path, source);
 
   /// Generate data source mappings
   const dataSourceTemplatePath = './templates/dataSource.template.yaml';
   const dataSourceTemplate = loadSubgraphDataSourceTemplate(dataSourceTemplatePath);
-  const dataSource = assignDataSouroce(dataSourceTemplate, contract);
+  const dataSource = assignDataSource(dataSourceTemplate, contract);
   return dataSource;
 }
 
