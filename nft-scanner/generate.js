@@ -4,6 +4,7 @@ const fs = require('fs');
 const util = require('util');
 const csv = require('csv-parser');
 const yaml = require('js-yaml');
+var isMappingGenerated = false;
 
 /// Load ABI from etherscan
 async function loadABI(contractAddress) {
@@ -136,10 +137,13 @@ async function run(contract) {
   contract.eventHandlers = [{ handler, event }];
 
   //// Generate mapping source codes --DO NOT NEEDED, USE A COMMON MAPPING
-  // const sourceTemplatePath = './templates/sourceMapping.template.ts';
-  // const eventParamsMapping = getTransferEventParamsMapping(interface.inputs);
-  // const source = generateSource(sourceTemplatePath, contract.name, eventParamsMapping);
-  // writeSource(contract.source_file_path, source);
+  if (!isMappingGenerated) {
+    isMappingGenerated = true; //only allow to generate once for the common mapping file
+    const sourceTemplatePath = './templates/sourceMapping.template.ts';
+    const eventParamsMapping = getTransferEventParamsMapping(interface.inputs);
+    const source = generateSource(sourceTemplatePath, contract.name, eventParamsMapping);
+    writeSource(contract.source_file_path, source);
+  }  
 
   /// Generate data source mappings
   const dataSourceTemplatePath = './templates/dataSource.template.yaml';
