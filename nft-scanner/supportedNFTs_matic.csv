@@ -1,4 +1,4 @@
-name,network,contract,start_block,official_website,mapping_name
-Zedhorse,matic,0xA5F1Ea7DF861952863dF2e8d1312f7305dabf215,4605167,https://zed.run/,mapping
-Artvatars,matic,0xbCCaa7ACb552A2c7eb27C7eb77c2CC99580735b9,13265807,https://artvatars.com/,mapping
-EtheremonMonster,matic,0x9928A8ea82d86290DfD1920E126B3872890525b3,10073069,https://ethermon.io/,mapping
+name,network,contract,start_block,mapping_name,official_website
+Zedhorse,matic,0xA5F1Ea7DF861952863dF2e8d1312f7305dabf215,4605167,mapping,https://zed.run/
+Artvatars,matic,0xbCCaa7ACb552A2c7eb27C7eb77c2CC99580735b9,13265807,mapping,https://artvatars.com/
+EtheremonMonster,matic,0x9928A8ea82d86290DfD1920E126B3872890525b3,10073069,mapping,https://ethermon.io/

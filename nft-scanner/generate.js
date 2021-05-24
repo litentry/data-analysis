@@ -132,18 +132,20 @@ async function run(contract) {
     abi = readABI(contract.abi_file_path);
   }
   
-  const interface = _.find(abi, { name: 'Transfer', type: 'event' });
-  console.log(`Interface: ${util.inspect(interface, { showhidden: false, depth: null })}`);
-  if (_.isEmpty(interface)) {
-    throw new Error(`Event *Transfer* not found`);
-  }
 
-  const [handler, event] = getEventHandlerPair(interface.name, interface.inputs);
-  contract.eventHandlers = [{ handler, event }];
 
-  //// Generate mapping source codes --DO NOT NEEDED, USE A COMMON MAPPING
+  //// Generate mapping source codes 
   if (!isMappingGenerated) {
     isMappingGenerated = true; //only allow to generate once for the common mapping file
+
+    const interface = _.find(abi, { name: 'Transfer', type: 'event' });
+    console.log(`Interface: ${util.inspect(interface, { showhidden: false, depth: null })}`);
+    if (_.isEmpty(interface)) {
+      throw new Error(`Event *Transfer* not found`);
+    }
+    const [handler, event] = getEventHandlerPair(interface.name, interface.inputs);
+    contract.eventHandlers = [{ handler, event }];
+
     const sourceTemplatePath = './templates/sourceMapping.template.ts';
     const eventParamsMapping = getTransferEventParamsMapping(interface.inputs);
     const source = generateSource(sourceTemplatePath, contract.name, eventParamsMapping);
@@ -169,7 +171,7 @@ async function loadContracts(path) {
     fs.createReadStream(path)
       .pipe(
         csv({
-          headers: ['name', 'network', 'address', 'start_block', 'official_website', 'mapping_name'],
+          headers: ['name', 'network', 'address', 'start_block', 'mapping_name', 'official_website'],
           mapValues: ({ header, index, value }) => {
             if (header === 'name') {
               return value
