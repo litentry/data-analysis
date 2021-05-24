@@ -188,7 +188,9 @@ async function loadContracts(path) {
 
 (async () => {
   try {
-    const supportedNftPath = './supportedNFTs.csv';
+    //const supportedNftPath = './supportedNFTs.csv';
+    const csvArgPosition = 2;
+    const supportedNftPath = process.argv[csvArgPosition];
     const contractList = await loadContracts(supportedNftPath);
     const dataSourceList = [];
     for (let contract of contractList) {
