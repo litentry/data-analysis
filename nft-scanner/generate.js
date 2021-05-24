@@ -115,11 +115,10 @@ function getTransferEventParamsMapping(inputs) {
 async function run(contract) {
   contract['abi_name'] = contract.name;
   contract['abi_file_path'] = `./abis/${contract.name}.json`;
-  contract['source_file_path'] = `./src/${contract.name}Mapping.ts`;
-  
+  contract['source_file_path'] = `./src/${contract.mapping_name}.ts`;
+  // Load ABI 
   console.log(`Loading *${contract.name}[${contract.address}]* ABI...`);
   var abi = null;
-  // Load ABI from etherscan
   if (contract.network == 'mainnet') { //write ABI currently only available in ethereum network mainnet
     abi = await loadABI(contract.address);
     writeABI(contract.abi_file_path, abi);
@@ -161,7 +160,7 @@ async function loadContracts(path) {
     fs.createReadStream(path)
       .pipe(
         csv({
-          headers: ['name', 'network', 'address', 'start_block', 'official_website'],
+          headers: ['name', 'network', 'address', 'start_block', 'official_website', 'mapping_name'],
           mapValues: ({ header, index, value }) => {
             if (header === 'name') {
               return value
@@ -188,7 +187,6 @@ async function loadContracts(path) {
 
 (async () => {
   try {
-    //const supportedNftPath = './supportedNFTs.csv';
     const csvArgPosition = 2;
     const supportedNftPath = process.argv[csvArgPosition];
     const contractList = await loadContracts(supportedNftPath);
