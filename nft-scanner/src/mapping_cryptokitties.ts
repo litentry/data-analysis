@@ -6,8 +6,8 @@ export function handleBirth(event: Birth): void {
     let id = event.address.toHex() + '#' + event.params.kittyId.toHex() //use kitty id as the entity id
     let entity = new TokenHolder(id)
     entity.contract = event.address;
-    entity.tokenId = event.params.tokenId;
-    entity.owner = event.params.to;
+    entity.tokenId = event.params.kittyId;
+    entity.owner = event.params.owner;
     entity.save();
 
     //bind the contract address in order to be able to access the public methods of the contract
