@@ -1,10 +1,10 @@
 name,network,contract,start_block,mapping_name,official_website
 CryptoSkulls,mainnet,0xc1caf0c19a8ac28c41fe59ba6c754e4b9bd54de9,7782945,mapping,https://cryptoskulls.com/
 Wrapped Cryptopunks,mainnet,0xb7F7F6C52F2e2fdb1963Eab30438024864c313F6,10821737,mapping,
-CryptoPunks,mainnet,0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB,3914495,mapping,
+CryptoPunks,mainnet,0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB,3914495,mapping_CryptoPunks,
 Ethereum Name Service,mainnet,0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85,9380410,mapping,https://ens.domains/
 Voxies,mainnet,0xe3435edbf54b5126e817363900234adfee5b3cee,12131835,mapping,https://voxies.io/
-CryptoKitties,mainnet,0x06012c8cf97bead5deae237070f9587f8e7a266d,4605167,mapping_cryptokitties,https://www.cryptokitties.co/
+CryptoKitties,mainnet,0x06012c8cf97bead5deae237070f9587f8e7a266d,4605167,mapping_CryptoKitties,https://www.cryptokitties.co/
 Soare,mainnet,0x629a673a8242c2ac4b7b8c5d8735fbeac21a6205 ,10038076,mapping,https://sorare.com/
 crypto_UD,mainnet,0xd1e5b0ff1287aa9f9a268759062e4ab08b9dacbe,9082251,mapping,http://unstoppabledomains.com/
 Gods Unchained Cards,mainnet,0x0e3a2a1f2146d86a604adc220b4967a898d7fe07,8945008,mapping,https://godsunchained.com/
@@ -17,16 +17,16 @@ Hashmasks,mainnet,0xc2c747e0f7004f9e8817db2ca4997657a7746928,11743743,mapping,ht
 SuperRare,mainnet,0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0,8486734,mapping,https://medium.com/superrare
 Art Blocks,mainnet,0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270,11437151,mapping,https://artblocks.io/
 AcclimatedMoonCats,mainnet,0xc3f733ca98e0dad0386979eb96fb1722a1a05e69,12287196,mapping,
-Eternal Dreams by Robbie Tilton,mainnet,0xbc3d85bdb57a8ecb1ef79c40552ad04e7285026e,12375313,mapping,
+Eternal Dreams by Robbie Tilton,mainnet,0xbc3d85bdb57a8ecb1ef79c40552ad04e7285026e,12375313,mapping_EternalDreamsbyRobbieTilton,
 Alchemist Crucible v1,mainnet,0x54e0395CFB4f39beF66DBCd5bD93Cca4E9273D56,11881064,mapping,
 PolkamonOfficialCollection,mainnet,0x85f0e02cb992aa1f9f47112f815f519ef1a59e2d,12134519,mapping,
 Meebits,mainnet,0x7Bd29408f11D2bFC23c34f18275bBf23bB716Bc7,12358080,mapping,
 BoredApeYachtClub,mainnet,0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d,12287507,mapping,
 VISOR,mainnet,0xae03233307865623aaef76da9ade669b86e6f20a,12013637,mapping,
-Machine Hallucinations_Mars_Lands_MACHINEHA,mainnet,0xE604D1bcD6Ac7A03461e8e56500D60D476f1E569,12369278,mapping,
+Machine Hallucinations_Mars_Lands_MACHINEHA,mainnet,0xE604D1bcD6Ac7A03461e8e56500D60D476f1E569,12369278,mapping_MachineHallucinations_Mars_Lands_MACHINEHA,
 SatoshiFaces,mainnet,0xEc031b8Abe78ecab0A6636b92aF53d7013a97A37,12182729,mapping,
 GegoDego,mainnet,0x27b4bc90fbe56f02ef50f2e2f79d7813aa8941a7,10939491,mapping,https://dego.finance/
-BlockCities,mainnet,0x2f2d5aa0efdb9ca3c9bb789693d06bebea88792f,7488550,mapping,https://www.blockcities.co/
+BlockCities,mainnet,0x2f2d5aa0efdb9ca3c9bb789693d06bebea88792f,7488550,mapping_BlockCities,https://www.blockcities.co/
 EtherSouls,mainnet,0x1f9695c836ec9d12391ed46cf4fc50da664f5dc2,11624874,mapping,https://www.ethersouls.xyz/
 Pixls,mainnet,0x082903f4e94c5e10a2b116a4284940a36afaed63,11996529,mapping,https://www.getpixls.com/
 EtheremonMonster,mainnet,0x5d00d312e171be5342067c09bae883f9bcb2003b,6228526,mapping,https://ethermon.io/
@@ -37,5 +37,5 @@ Flower,mainnet,0x4f41d10f7e67fd16bde916b4a6dc3dd101c57394,6827767,mapping,https:
 CosmoMasks,mainnet,0x0580ae26963230bfbd2a775ff0afa937fd157774,12037380,mapping,https://thecosmomasks.com/
 OVR Land,mainnet,0x56b80bbee68932a8d739315c79bc7b125341098a,11366848,mapping,https://www.ovr.ai/
 NFTegg Series,mainnet,0x10a7ecf97c46e3229fe1b801a5943153762e0cf0,11166980,mapping,https://nftegg.com/
-CryptoFlowers,mainnet,0x8bc67d00253fd60b1afcce88b78820413139f4c6,6822884,mapping,https://cryptoflowers.io/
+CryptoFlowers,mainnet,0x8bc67d00253fd60b1afcce88b78820413139f4c6,6822884,mapping_CryptoFlowers,https://cryptoflowers.io/
 MARBLE_NFT,mainnet,0x1d963688fe2209a98db35c67a041524822cf04ff,8060542,mapping,https://marble.cards/
