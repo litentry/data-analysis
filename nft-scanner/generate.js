@@ -135,9 +135,9 @@ async function run(contract) {
     contract['abi_file_path'] = './abis/ERC721.json';
   } 
   if (contract.mapping_name == 'mapping' && contract.network != 'matic') {
-    contract['source_file_path'] = `./src/${contract.name}Mapping.ts`;
+    contract['source_file_path'] = `./src/${contract.network}/${contract.name}Mapping.ts`;
   } else {
-    contract['source_file_path'] = `./src/${contract.mapping_name}.ts`;
+    contract['source_file_path'] = `./src/${contract.network}/${contract.mapping_name}.ts`;
   } 
 
   // Load ABI 
