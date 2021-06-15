@@ -3,26 +3,6 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Zedhorse
-    network: matic
-    source:
-      address: "0xa5f1ea7df861952863df2e8d1312f7305dabf215"
-      abi: Zedhorse
-      startBlock: 4605167
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - Transfer
-      abis:
-        - name: Zedhorse
-          file: ./abis/Zedhorse.json
-      eventHandlers:
-        - event: Transfer(indexed address,indexed address,indexed uint256)
-          handler: handleTransfer
-      file: ./src/ZedhorseMapping.ts
-  - kind: ethereum/contract
     name: CryptoSkulls
     network: mainnet
     source:
@@ -34,14 +14,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: CryptoSkulls
           file: ./abis/CryptoSkulls.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/CryptoSkullsMapping.ts
+      file: ./src/mainnet/CryptoSkullsMapping.ts
   - kind: ethereum/contract
     name: WrappedCryptopunks
     network: mainnet
@@ -54,14 +34,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: WrappedCryptopunks
           file: ./abis/WrappedCryptopunks.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/WrappedCryptopunksMapping.ts
+      file: ./src/mainnet/WrappedCryptopunksMapping.ts
   - kind: ethereum/contract
     name: CryptoPunks
     network: mainnet
@@ -74,14 +54,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: CryptoPunks
           file: ./abis/CryptoPunks.json
       eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
+        - event: PunkTransfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/CryptoPunksMapping.ts
+      file: ./src/mainnet/mapping_CryptoPunks.ts
   - kind: ethereum/contract
     name: EthereumNameService
     network: mainnet
@@ -94,14 +74,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: EthereumNameService
           file: ./abis/EthereumNameService.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/EthereumNameServiceMapping.ts
+      file: ./src/mainnet/EthereumNameServiceMapping.ts
   - kind: ethereum/contract
     name: Voxies
     network: mainnet
@@ -114,14 +94,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: Voxies
           file: ./abis/Voxies.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/VoxiesMapping.ts
+      file: ./src/mainnet/VoxiesMapping.ts
   - kind: ethereum/contract
     name: CryptoKitties
     network: mainnet
@@ -134,14 +114,16 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: CryptoKitties
           file: ./abis/CryptoKitties.json
       eventHandlers:
+        - event: Birth(address,uint256,uint256,uint256,uint256)
+          handler: handleBirth
         - event: Transfer(address,address,uint256)
           handler: handleTransfer
-      file: ./src/CryptoKittiesMapping.ts
+      file: ./src/mainnet/mapping_CryptoKitties.ts
   - kind: ethereum/contract
     name: Soare
     network: mainnet
@@ -154,14 +136,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: Soare
           file: ./abis/Soare.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/SoareMapping.ts
+      file: ./src/mainnet/SoareMapping.ts
   - kind: ethereum/contract
     name: crypto_UD
     network: mainnet
@@ -174,14 +156,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: crypto_UD
           file: ./abis/crypto_UD.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/crypto_UDMapping.ts
+      file: ./src/mainnet/crypto_UDMapping.ts
   - kind: ethereum/contract
     name: GodsUnchainedCards
     network: mainnet
@@ -194,14 +176,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: GodsUnchainedCards
           file: ./abis/GodsUnchainedCards.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/GodsUnchainedCardsMapping.ts
+      file: ./src/mainnet/GodsUnchainedCardsMapping.ts
   - kind: ethereum/contract
     name: AVASTARToken
     network: mainnet
@@ -214,14 +196,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: AVASTARToken
           file: ./abis/AVASTARToken.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/AVASTARTokenMapping.ts
+      file: ./src/mainnet/AVASTARTokenMapping.ts
   - kind: ethereum/contract
     name: Rarible
     network: mainnet
@@ -234,14 +216,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: Rarible
           file: ./abis/Rarible.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/RaribleMapping.ts
+      file: ./src/mainnet/RaribleMapping.ts
   - kind: ethereum/contract
     name: UniswapV3PositionsNFT
     network: mainnet
@@ -254,14 +236,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: UniswapV3PositionsNFT
           file: ./abis/UniswapV3PositionsNFT.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/UniswapV3PositionsNFTMapping.ts
+      file: ./src/mainnet/UniswapV3PositionsNFTMapping.ts
   - kind: ethereum/contract
     name: VoxoDeus
     network: mainnet
@@ -274,14 +256,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: VoxoDeus
           file: ./abis/VoxoDeus.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/VoxoDeusMapping.ts
+      file: ./src/mainnet/VoxoDeusMapping.ts
   - kind: ethereum/contract
     name: WrappedMoonCatsRescue
     network: mainnet
@@ -294,14 +276,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: WrappedMoonCatsRescue
           file: ./abis/WrappedMoonCatsRescue.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/WrappedMoonCatsRescueMapping.ts
+      file: ./src/mainnet/WrappedMoonCatsRescueMapping.ts
   - kind: ethereum/contract
     name: Hashmasks
     network: mainnet
@@ -314,14 +296,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: Hashmasks
           file: ./abis/Hashmasks.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/HashmasksMapping.ts
+      file: ./src/mainnet/HashmasksMapping.ts
   - kind: ethereum/contract
     name: SuperRare
     network: mainnet
@@ -334,14 +316,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: SuperRare
           file: ./abis/SuperRare.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/SuperRareMapping.ts
+      file: ./src/mainnet/SuperRareMapping.ts
   - kind: ethereum/contract
     name: ArtBlocks
     network: mainnet
@@ -354,14 +336,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: ArtBlocks
           file: ./abis/ArtBlocks.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/ArtBlocksMapping.ts
+      file: ./src/mainnet/ArtBlocksMapping.ts
   - kind: ethereum/contract
     name: AcclimatedMoonCats
     network: mainnet
@@ -374,14 +356,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: AcclimatedMoonCats
           file: ./abis/AcclimatedMoonCats.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/AcclimatedMoonCatsMapping.ts
+      file: ./src/mainnet/AcclimatedMoonCatsMapping.ts
   - kind: ethereum/contract
     name: EternalDreamsbyRobbieTilton
     network: mainnet
@@ -394,14 +376,16 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: EternalDreamsbyRobbieTilton
           file: ./abis/EternalDreamsbyRobbieTilton.json
       eventHandlers:
+        - event: NiftyCreated(address,uint256,uint256)
+          handler: handleNiftyCreated
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/EternalDreamsbyRobbieTiltonMapping.ts
+      file: ./src/mainnet/mapping_EternalDreamsbyRobbieTilton.ts
   - kind: ethereum/contract
     name: AlchemistCruciblev1
     network: mainnet
@@ -414,14 +398,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: AlchemistCruciblev1
           file: ./abis/AlchemistCruciblev1.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/AlchemistCruciblev1Mapping.ts
+      file: ./src/mainnet/AlchemistCruciblev1Mapping.ts
   - kind: ethereum/contract
     name: PolkamonOfficialCollection
     network: mainnet
@@ -434,14 +418,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: PolkamonOfficialCollection
           file: ./abis/PolkamonOfficialCollection.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/PolkamonOfficialCollectionMapping.ts
+      file: ./src/mainnet/PolkamonOfficialCollectionMapping.ts
   - kind: ethereum/contract
     name: Meebits
     network: mainnet
@@ -454,14 +438,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: Meebits
           file: ./abis/Meebits.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/MeebitsMapping.ts
+      file: ./src/mainnet/MeebitsMapping.ts
   - kind: ethereum/contract
     name: BoredApeYachtClub
     network: mainnet
@@ -474,14 +458,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: BoredApeYachtClub
           file: ./abis/BoredApeYachtClub.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/BoredApeYachtClubMapping.ts
+      file: ./src/mainnet/BoredApeYachtClubMapping.ts
   - kind: ethereum/contract
     name: VISOR
     network: mainnet
@@ -494,14 +478,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: VISOR
           file: ./abis/VISOR.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/VISORMapping.ts
+      file: ./src/mainnet/VISORMapping.ts
   - kind: ethereum/contract
     name: MachineHallucinations_Mars_Lands_MACHINEHA
     network: mainnet
@@ -514,14 +498,16 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: MachineHallucinations_Mars_Lands_MACHINEHA
           file: ./abis/MachineHallucinations_Mars_Lands_MACHINEHA.json
       eventHandlers:
+        - event: NiftyCreated(address,uint256,uint256)
+          handler: handleNiftyCreated
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/MachineHallucinations_Mars_Lands_MACHINEHAMapping.ts
+      file: ./src/mainnet/mapping_MachineHallucinations_Mars_Lands_MACHINEHA.ts
   - kind: ethereum/contract
     name: SatoshiFaces
     network: mainnet
@@ -534,14 +520,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: SatoshiFaces
           file: ./abis/SatoshiFaces.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/SatoshiFacesMapping.ts
+      file: ./src/mainnet/SatoshiFacesMapping.ts
   - kind: ethereum/contract
     name: GegoDego
     network: mainnet
@@ -554,14 +540,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: GegoDego
           file: ./abis/GegoDego.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/GegoDegoMapping.ts
+      file: ./src/mainnet/GegoDegoMapping.ts
   - kind: ethereum/contract
     name: BlockCities
     network: mainnet
@@ -574,14 +560,16 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: BlockCities
           file: ./abis/BlockCities.json
       eventHandlers:
+        - event: BuildingMinted(indexed uint256,indexed address,indexed address)
+          handler: handleBuildingMinted
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/BlockCitiesMapping.ts
+      file: ./src/mainnet/mapping_BlockCities.ts
   - kind: ethereum/contract
     name: EtherSouls
     network: mainnet
@@ -594,14 +582,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: EtherSouls
           file: ./abis/EtherSouls.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/EtherSoulsMapping.ts
+      file: ./src/mainnet/EtherSoulsMapping.ts
   - kind: ethereum/contract
     name: Pixls
     network: mainnet
@@ -614,14 +602,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: Pixls
           file: ./abis/Pixls.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/PixlsMapping.ts
+      file: ./src/mainnet/PixlsMapping.ts
   - kind: ethereum/contract
     name: EtheremonMonster
     network: mainnet
@@ -634,14 +622,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: EtheremonMonster
           file: ./abis/EtheremonMonster.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/EtheremonMonsterMapping.ts
+      file: ./src/mainnet/EtheremonMonsterMapping.ts
   - kind: ethereum/contract
     name: MEME
     network: mainnet
@@ -654,14 +642,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: MEME
           file: ./abis/MEME.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/MEMEMapping.ts
+      file: ./src/mainnet/MEMEMapping.ts
   - kind: ethereum/contract
     name: dloopArtRegistry
     network: mainnet
@@ -674,14 +662,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: dloopArtRegistry
           file: ./abis/dloopArtRegistry.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/dloopArtRegistryMapping.ts
+      file: ./src/mainnet/dloopArtRegistryMapping.ts
   - kind: ethereum/contract
     name: BFH_Unit
     network: mainnet
@@ -694,14 +682,14 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: BFH_Unit
           file: ./abis/BFH_Unit.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/BFH_UnitMapping.ts
+      file: ./src/mainnet/BFH_UnitMapping.ts
   - kind: ethereum/contract
     name: Flower
     network: mainnet
@@ -714,111 +702,115 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: Flower
           file: ./abis/Flower.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/FlowerMapping.ts
+      file: ./src/mainnet/FlowerMapping.ts
   - kind: ethereum/contract
     name: CosmoMasks
-    network: "0x0580ae26963230bfbd2a775ff0afa937fd157774"
+    network: mainnet
     source:
-      address: "12037380"
+      address: "0x0580ae26963230bfbd2a775ff0afa937fd157774"
       abi: CosmoMasks
-      startBlock: .nan
+      startBlock: 12037380
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: CosmoMasks
           file: ./abis/CosmoMasks.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/CosmoMasksMapping.ts
+      file: ./src/mainnet/CosmoMasksMapping.ts
   - kind: ethereum/contract
     name: OVRLand
-    network: "0x56b80bbee68932a8d739315c79bc7b125341098a"
+    network: mainnet
     source:
-      address: "11366848"
+      address: "0x56b80bbee68932a8d739315c79bc7b125341098a"
       abi: OVRLand
-      startBlock: .nan
+      startBlock: 11366848
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: OVRLand
           file: ./abis/OVRLand.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/OVRLandMapping.ts
+      file: ./src/mainnet/OVRLandMapping.ts
   - kind: ethereum/contract
     name: NFTeggSeries
-    network: "0x10a7ecf97c46e3229fe1b801a5943153762e0cf0"
+    network: mainnet
     source:
-      address: "11166980"
+      address: "0x10a7ecf97c46e3229fe1b801a5943153762e0cf0"
       abi: NFTeggSeries
-      startBlock: .nan
+      startBlock: 11166980
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: NFTeggSeries
           file: ./abis/NFTeggSeries.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/NFTeggSeriesMapping.ts
+      file: ./src/mainnet/NFTeggSeriesMapping.ts
   - kind: ethereum/contract
     name: CryptoFlowers
-    network: "0x8bc67d00253fd60b1afcce88b78820413139f4c6"
+    network: mainnet
     source:
-      address: "6822884"
+      address: "0x8bc67d00253fd60b1afcce88b78820413139f4c6"
       abi: CryptoFlowers
-      startBlock: .nan
+      startBlock: 6822884
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: CryptoFlowers
           file: ./abis/CryptoFlowers.json
       eventHandlers:
+        - event: Birth(address,uint256,uint256,uint256,uint256)
+          handler: handleBirth
+        - event: Money(address,string,uint256,uint256,uint256,uint256)
+          handler: handleMoney
         - event: Transfer(address,address,uint256)
           handler: handleTransfer
-      file: ./src/CryptoFlowersMapping.ts
+      file: ./src/mainnet/mapping_CryptoFlowers.ts
   - kind: ethereum/contract
     name: MARBLE_NFT
-    network: "0x1d963688fe2209a98db35c67a041524822cf04ff"
+    network: mainnet
     source:
-      address: "8060542"
+      address: "0x1d963688fe2209a98db35c67a041524822cf04ff"
       abi: MARBLE_NFT
-      startBlock: .nan
+      startBlock: 8060542
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Transfer
+        - TokenHolder
       abis:
         - name: MARBLE_NFT
           file: ./abis/MARBLE_NFT.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/MARBLE_NFTMapping.ts
+      file: ./src/mainnet/MARBLE_NFTMapping.ts
