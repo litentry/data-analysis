@@ -1,9 +1,8 @@
 import { log, BigInt } from '@graphprotocol/graph-ts';
 import { TokenHolder } from "../generated/schema";
 import {
-  Transfer,
-  ERC721
-} from '../generated/{{ contract_name }}/ERC721';
+  Transfer
+} from '../generated/{{ contract_name }}/{{ contract_name }}';
 
 export function handleTransfer(event: Transfer): void {
   let id = event.address.toHex() + '#' + event.params.{{ eventParams_tokenId }}.toHex();
