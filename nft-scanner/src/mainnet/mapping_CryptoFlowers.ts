@@ -2,7 +2,7 @@ import { log, BigInt } from '@graphprotocol/graph-ts';
 import { TokenHolder } from "../../generated/schema";
 import {
   Transfer, Birth, Money
-} from '../../generated/BlockCities/BlockCities';
+} from '../../generated/CryptoFlowers/CryptoFlowers';
 
 export function handleBirth(event: Birth): void {
   let id = event.address.toHex() + '#' + event.params.flowerId.toHex();
