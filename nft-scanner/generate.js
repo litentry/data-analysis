@@ -159,7 +159,7 @@ async function run(contract) {
   contract.eventHandlers = [{ handler, event }];
 
   //// Generate mapping source codes 
-  if (!isMappingGenerated) {
+  if (!isMappingGenerated && contract.mapping_name == "mapping") {
     if (contract.network == 'matic') {
       isMappingGenerated = true; //only allow to generate once for the common mapping file
     }
