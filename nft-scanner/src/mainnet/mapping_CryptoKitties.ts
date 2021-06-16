@@ -1,5 +1,5 @@
-import { Birth, Transfer, CryptoKitties } from '../generated/CryptoKitties/CryptoKitties'
-import { TokenHolder } from '../generated/schema'
+import { Birth, Transfer, CryptoKitties } from '../../generated/CryptoKitties/CryptoKitties'
+import { TokenHolder } from '../../generated/schema'
 import { log } from "@graphprotocol/graph-ts"
 
 export function handleBirth(event: Birth): void {

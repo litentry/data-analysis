@@ -1,8 +1,8 @@
 import { log, BigInt } from '@graphprotocol/graph-ts';
-import { TokenHolder } from "../generated/schema";
+import { TokenHolder } from "../../generated/schema";
 import {
   Transfer, BuildingMinted
-} from '../generated/BlockCities/BlockCities';
+} from '../../generated/BlockCities/BlockCities';
 
 export function handleBuildingMinted(event: BuildingMinted): void {
   let id = event.address.toHex() + '#' + event.params._tokenId.toHex();

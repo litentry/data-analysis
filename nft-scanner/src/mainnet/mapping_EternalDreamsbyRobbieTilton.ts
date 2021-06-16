@@ -1,8 +1,8 @@
 import { log, BigInt } from '@graphprotocol/graph-ts';
-import { TokenHolder } from "../generated/schema";
+import { TokenHolder } from "../../generated/schema";
 import {
   Transfer, NiftyCreated
-} from '../generated/EternalDreamsbyRobbieTilton/EternalDreamsbyRobbieTilton';
+} from '../../generated/EternalDreamsbyRobbieTilton/EternalDreamsbyRobbieTilton';
 
 export function handleNiftyCreated(event: NiftyCreated): void {
   let id = event.address.toHex() + '#' + event.params._tokenId.toHex();
