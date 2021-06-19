@@ -22,8 +22,12 @@ async function loadABI(contractAddress, network) {
         url: `https://api.bscscan.com/api?module=contract&action=getabi&address=${contractAddress}&format=raw`,
       }
       break;
-    case 'matic'://TODO: check the api
-
+    case 'matic'://TODO: check the api key
+      config = {
+        method: 'get',
+        url: `https://api.polygonscan.com/api?module=contract&action=getabi&address=${contractAddress}&apikey=YourApiKeyToken`,
+      }
+      break;  
   }
   const resp = await axios(config);
   const abi = resp.data;
