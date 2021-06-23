@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Litentry
@@ -18,11 +18,11 @@ dataSources:
         - User
       abis:
         - name: Litentry
-          file: ./abis/Litentry.json
+          file: Litentry/abis/Litentry.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mainnet/LitentryMapping.ts
+      file: Litentry/Litentry.wasm
   - kind: ethereum/contract
     name: Automata
     network: mainnet
@@ -39,8 +39,8 @@ dataSources:
         - User
       abis:
         - name: Automata
-          file: ./abis/Automata.json
+          file: Automata/abis/Automata.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mainnet/AutomataMapping.ts
+      file: Automata/Automata.wasm

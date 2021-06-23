@@ -10,7 +10,8 @@ mapping:
   apiVersion: 0.0.4
   language: wasm/assemblyscript
   entities:
-    - TokenHolder
+    - Asset
+    - User
   abis:
     - name: __abi_name__
       file: __abi_file_path__

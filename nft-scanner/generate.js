@@ -147,8 +147,9 @@ async function run(contract) {
   // Load ABI 
   console.log(`Loading *${contract.name}[${contract.address}]* ABI...`);
   var abi = null;
-  if (contract.mapping_name != 'mapping' && contract.network != 'matic') { //load ABI for mainnet and bsc
+  if (contract.network != 'matic') { //load ABI for mainnet and bsc
     abi = await loadABI(contract.address, contract.network);
+    console.log(abi);
     writeABI(contract.abi_file_path, abi);
   } else { //use manually stored abis for other networks for now, TODO: available apis to get ABI from other networks?
     abi = readABI(contract.abi_file_path);
@@ -220,8 +221,8 @@ async function loadContracts(path) {
 (async () => {
   try {
     const csvArgPosition = 2;
-    const supportedNftPath = process.argv[csvArgPosition];
-    const contractList = await loadContracts(supportedNftPath);
+    const supportedPath = process.argv[csvArgPosition];
+    const contractList = await loadContracts(supportedPath);
     const dataSourceList = [];
     for (let contract of contractList) {
       try {

@@ -2,8 +2,8 @@ import { log, BigInt, BigDecimal,Address } from '@graphprotocol/graph-ts';
 import { Asset, User } from "../../generated/schema";
 import {
   Transfer,
-  {{ contract_name }}
-} from '../../generated/{{ contract_name }}/{{ contract_name }}';
+  Litentry
+} from '../../generated/Litentry/Litentry';
 
 let zeroBD = BigDecimal.fromString('0')
 
@@ -19,7 +19,7 @@ function createUser(
 function createAsset(assetAddress: string): Asset {
   let asset = new Asset(assetAddress)
   // Can call the read-only functions of an ERC20 contract with below bind
-  let contract = {{ contract_name }}.bind(Address.fromString(assetAddress))
+  let contract = Litentry.bind(Address.fromString(assetAddress))
   asset.decimals = contract.decimals() ? contract.decimals() : null
   asset.name = contract.name() ? contract.name() : null
   asset.symbol = contract.symbol() ? contract.symbol() : null
@@ -36,7 +36,7 @@ function exponentToBigDecimal(decimals: i32): BigDecimal {
 
 function createAssetforUser(userID: string, tokenID:string): Asset {
   let asset = new Asset(userID.concat('-').concat(tokenID))
-  let contract =  {{ contract_name }}.bind(Address.fromString(tokenID))
+  let contract =  Litentry.bind(Address.fromString(tokenID))
   asset.decimals = contract.decimals() ? contract.decimals() : null
   asset.name = contract.name() ? contract.name() : null
   asset.symbol = contract.symbol() ? contract.symbol() : null
@@ -103,7 +103,7 @@ export function handleTransfer(event: Transfer): void {
    if(UserStatsTo.maxBalance < UserStatsTo.balance ){
     UserStatsTo.maxBalance = UserStatsTo.balance
   }
-   UserStatsTo.save() 
+   UserStatsTo.save()
 
 }
 }
