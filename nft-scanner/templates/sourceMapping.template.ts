@@ -43,6 +43,13 @@ function createAssetforUser(userID: string, tokenID:string): Asset {
   asset.balance = zeroBD
   asset.owner = userID
   asset.maxBalance = zeroBD
+  asset.amountIn = zeroBD
+  asset.amountOut = zeroBD
+  asset.amountTotal = zeroBD
+  asset.amountAver = zeroBD
+  asset.countIn = BigInt.fromI32(0)
+  asset.countOut = BigInt.fromI32(0)
+  asset.countTotal = BigInt.fromI32(0)
   log.info("Asset created", [])  
   return asset
 }
@@ -62,7 +69,7 @@ export function handleTransfer(event: Transfer): void {
   let AssetDecimals = asset.decimals
   let AssetDecimalsBD: BigDecimal = exponentToBigDecimal(AssetDecimals)
 
-  // caculate the balance for to user
+  // caculate the balance for from user
 
   if (userFromID != tokenID) {
     let UserFrom = User.load(userFromID)
@@ -79,12 +86,33 @@ export function handleTransfer(event: Transfer): void {
         .div(AssetDecimalsBD)
         .truncate(AssetDecimals),
     )
+    //caculate the max balance for from user
     if(UserStatsFrom.maxBalance < UserStatsFrom.balance ){
       UserStatsFrom.maxBalance = UserStatsFrom.balance
     }
+    //caculate the number of transfer, amount ===> out direction 
+    UserStatsFrom.countOut = UserStatsFrom.countOut + BigInt.fromI32(1)
+    UserStatsFrom.countTotal = UserStatsFrom.countTotal + BigInt.fromI32(1)
+    UserStatsFrom.amountOut = UserStatsFrom.amountOut.plus(
+      event.params.value
+        .toBigDecimal()
+        .div(AssetDecimalsBD)
+        .truncate(AssetDecimals),
+    )
+    UserStatsFrom.amountTotal = UserStatsFrom.amountTotal.plus(
+      event.params.value
+        .toBigDecimal()
+        .div(AssetDecimalsBD)
+        .truncate(AssetDecimals),
+    )
+    //caculate the average amount per transfer
+    UserStatsFrom.amountAver = UserStatsFrom.amountTotal.div(UserStatsFrom.countTotal.toBigDecimal())
     UserStatsFrom.save()
   }
-  // caculate the balance for from user
+
+
+
+  // caculate the balance for to user
  if (userToID != tokenID) {
   let UserTo = User.load(userToID)
   if (UserTo == null) {
@@ -100,10 +128,31 @@ export function handleTransfer(event: Transfer): void {
        .div(AssetDecimalsBD)
        .truncate(AssetDecimals),
    )
+   //caculate the max balance for to user
    if(UserStatsTo.maxBalance < UserStatsTo.balance ){
     UserStatsTo.maxBalance = UserStatsTo.balance
   }
+   //caculate the number of transfer, amount ===> in direction 
+    UserStatsTo.countIn = UserStatsTo.countIn + BigInt.fromI32(1)
+    UserStatsTo.countTotal = UserStatsTo.countTotal + BigInt.fromI32(1)
+    UserStatsTo.amountIn = UserStatsTo.amountIn.plus(
+        event.params.value
+          .toBigDecimal()
+          .div(AssetDecimalsBD)
+          .truncate(AssetDecimals),
+    )
+    UserStatsTo.amountTotal = UserStatsTo.amountTotal.plus(
+        event.params.value
+          .toBigDecimal()
+          .div(AssetDecimalsBD)
+          .truncate(AssetDecimals),
+    )
+    //caculate the average amount per transfer
+    UserStatsTo.amountAver = UserStatsTo.amountTotal.div(UserStatsTo.countTotal.toBigDecimal())
+
    UserStatsTo.save() 
+
+  
 
 }
 }

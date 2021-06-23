@@ -87,6 +87,69 @@ export class Asset extends Entity {
     this.set("maxBalance", Value.fromBigDecimal(value));
   }
 
+  get countIn(): BigInt {
+    let value = this.get("countIn");
+    return value.toBigInt();
+  }
+
+  set countIn(value: BigInt) {
+    this.set("countIn", Value.fromBigInt(value));
+  }
+
+  get countOut(): BigInt {
+    let value = this.get("countOut");
+    return value.toBigInt();
+  }
+
+  set countOut(value: BigInt) {
+    this.set("countOut", Value.fromBigInt(value));
+  }
+
+  get countTotal(): BigInt {
+    let value = this.get("countTotal");
+    return value.toBigInt();
+  }
+
+  set countTotal(value: BigInt) {
+    this.set("countTotal", Value.fromBigInt(value));
+  }
+
+  get amountIn(): BigDecimal {
+    let value = this.get("amountIn");
+    return value.toBigDecimal();
+  }
+
+  set amountIn(value: BigDecimal) {
+    this.set("amountIn", Value.fromBigDecimal(value));
+  }
+
+  get amountOut(): BigDecimal {
+    let value = this.get("amountOut");
+    return value.toBigDecimal();
+  }
+
+  set amountOut(value: BigDecimal) {
+    this.set("amountOut", Value.fromBigDecimal(value));
+  }
+
+  get amountTotal(): BigDecimal {
+    let value = this.get("amountTotal");
+    return value.toBigDecimal();
+  }
+
+  set amountTotal(value: BigDecimal) {
+    this.set("amountTotal", Value.fromBigDecimal(value));
+  }
+
+  get amountAver(): BigDecimal {
+    let value = this.get("amountAver");
+    return value.toBigDecimal();
+  }
+
+  set amountAver(value: BigDecimal) {
+    this.set("amountAver", Value.fromBigDecimal(value));
+  }
+
   get owner(): string {
     let value = this.get("owner");
     return value.toString();

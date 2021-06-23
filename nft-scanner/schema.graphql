@@ -15,6 +15,20 @@ type Asset @entity {
     balance: BigDecimal!
     "max balance ever"
     maxBalance: BigDecimal!
+    "Number of in-Transfer"
+    countIn: BigInt!
+    "Number of out-Transfer"
+    countOut: BigInt!
+    "Number of Transfer totally"
+    countTotal: BigInt!
+    "in-Transfer amount"
+    amountIn: BigDecimal!
+    "out-Transfer amount"
+    amountOut: BigDecimal!
+    "total Transfer amount"
+    amountTotal: BigDecimal!
+    "average amount per transfer"
+    amountAver: BigDecimal!
     "relationship"
     owner: User!
 }
