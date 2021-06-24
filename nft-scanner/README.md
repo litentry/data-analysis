@@ -1,4 +1,4 @@
-This project is forked from /litentry/nft-scanner and extended to consider multiple networks.
+This project is forked from /litentry/nft-scanner and extended to supporting of ERC20 and consider multiple networks.
 
 # Generate subgraph.yaml
 First, we need to generate a subgraph.yaml based on the provided nft list. For each network, we create a csv file respectively and store the corresponding nfts in it. When we call the generation command, we pass down the name of the csv file:
@@ -14,8 +14,8 @@ First, we need to generate a subgraph.yaml based on the provided nft list. For e
         --ipfs https://api.thegraph.com/ipfs/ \
         <subgraph name>
 
-# [ERC721 token](https://eips.ethereum.org/EIPS/eip-721)
+# [ERC20 token](https://eips.ethereum.org/EIPS/eip-20)
     
     event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId);
 
-# [Supported NFTs](./supportedNFTs.csv)
+# [Supported ERC-20](./supportedERC20_Ethereum.csv)
