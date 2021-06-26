@@ -1,5 +1,5 @@
 import { log, BigInt, BigDecimal,Address } from '@graphprotocol/graph-ts';
-import { Asset, User } from "../../generated/schema";
+import { Asset, User,Transaction } from "../../generated/schema";
 import {
   Transfer,
   Automata
@@ -34,6 +34,12 @@ function exponentToBigDecimal(decimals: i32): BigDecimal {
   return bd
 }
 
+function createTransaction(userID: string, tokenID:string,event:Transfer,direction:string): Transaction{
+  let transaction = new Transaction(userID.concat('-').concat(tokenID).concat('-').concat(event.block.timestamp.toString()).concat(direction))
+  transaction.tokenID = userID.concat('-').concat(tokenID)
+  log.info("Transaction created", [])  
+  return transaction
+}
 function createAssetforUser(userID: string, tokenID:string): Asset {
   let asset = new Asset(userID.concat('-').concat(tokenID))
   let contract =  Automata.bind(Address.fromString(tokenID))
@@ -60,7 +66,8 @@ export function handleTransfer(event: Transfer): void {
   let userToID = event.params.to.toHex()
   let tokenID = event.address.toHexString()
   let assetID = userToID.concat('-').concat(tokenID)
-  
+  const sDirectionOut = "out"
+  const sDirectionIn = "in"
   
   let asset = Asset.load(assetID)
   if (asset == null) {
@@ -70,8 +77,8 @@ export function handleTransfer(event: Transfer): void {
   let AssetDecimalsBD: BigDecimal = exponentToBigDecimal(AssetDecimals)
 
   // caculate the balance for from user
-
   if (userFromID != tokenID) {
+
     let UserFrom = User.load(userFromID)
     if (UserFrom == null) {
       UserFrom = createUser(userFromID)
@@ -107,7 +114,22 @@ export function handleTransfer(event: Transfer): void {
     )
     //caculate the average amount per transfer
     UserStatsFrom.amountAver = UserStatsFrom.amountTotal.div(UserStatsFrom.countTotal.toBigDecimal())
+    
+    //record the transaction detail
+    let UserTransactionFrom = createTransaction(userFromID,tokenID,event,sDirectionOut)
+    UserTransactionFrom.date = event.block.timestamp
+    UserTransactionFrom.amount = event.params.value
+    .toBigDecimal()
+    .div(AssetDecimalsBD)
+    .truncate(AssetDecimals)
+    UserTransactionFrom.direction = sDirectionOut
+    UserTransactionFrom.owner = userFromID
+    UserTransactionFrom.hash = event.block.hash
+    log.info("Transaction finished", [])  
+    UserTransactionFrom.balance = UserStatsFrom.balance
+
     UserStatsFrom.save()
+    UserTransactionFrom.save()
   }
 
 
@@ -149,8 +171,21 @@ export function handleTransfer(event: Transfer): void {
     )
     //caculate the average amount per transfer
     UserStatsTo.amountAver = UserStatsTo.amountTotal.div(UserStatsTo.countTotal.toBigDecimal())
+    
+    //record the transaction detail
+    let UserTransactionIn = createTransaction(userToID,tokenID,event,sDirectionIn)
+    UserTransactionIn.date = event.block.timestamp
+    UserTransactionIn.amount = event.params.value
+    .toBigDecimal()
+    .div(AssetDecimalsBD)
+    .truncate(AssetDecimals)
+    UserTransactionIn.direction = sDirectionIn
+    UserTransactionIn.owner = userToID
+    UserTransactionIn.hash = event.block.hash
+    UserTransactionIn.balance = UserStatsTo.balance
 
-   UserStatsTo.save() 
+    UserTransactionIn.save()
+    UserStatsTo.save() 
 
   
 

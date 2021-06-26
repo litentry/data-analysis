@@ -198,4 +198,115 @@ export class User extends Entity {
   set assets(value: Array<string>) {
     this.set("assets", Value.fromStringArray(value));
   }
+
+  get transactions(): Array<string> | null {
+    let value = this.get("transactions");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set transactions(value: Array<string> | null) {
+    if (value === null) {
+      this.unset("transactions");
+    } else {
+      this.set("transactions", Value.fromStringArray(value as Array<string>));
+    }
+  }
+}
+
+export class Transaction extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Transaction entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Transaction entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Transaction", id.toString(), this);
+  }
+
+  static load(id: string): Transaction | null {
+    return store.get("Transaction", id) as Transaction | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get date(): BigInt {
+    let value = this.get("date");
+    return value.toBigInt();
+  }
+
+  set date(value: BigInt) {
+    this.set("date", Value.fromBigInt(value));
+  }
+
+  get direction(): string {
+    let value = this.get("direction");
+    return value.toString();
+  }
+
+  set direction(value: string) {
+    this.set("direction", Value.fromString(value));
+  }
+
+  get amount(): BigDecimal {
+    let value = this.get("amount");
+    return value.toBigDecimal();
+  }
+
+  set amount(value: BigDecimal) {
+    this.set("amount", Value.fromBigDecimal(value));
+  }
+
+  get owner(): string {
+    let value = this.get("owner");
+    return value.toString();
+  }
+
+  set owner(value: string) {
+    this.set("owner", Value.fromString(value));
+  }
+
+  get tokenID(): string {
+    let value = this.get("tokenID");
+    return value.toString();
+  }
+
+  set tokenID(value: string) {
+    this.set("tokenID", Value.fromString(value));
+  }
+
+  get balance(): BigDecimal {
+    let value = this.get("balance");
+    return value.toBigDecimal();
+  }
+
+  set balance(value: BigDecimal) {
+    this.set("balance", Value.fromBigDecimal(value));
+  }
+
+  get hash(): Bytes {
+    let value = this.get("hash");
+    return value.toBytes();
+  }
+
+  set hash(value: Bytes) {
+    this.set("hash", Value.fromBytes(value));
+  }
 }

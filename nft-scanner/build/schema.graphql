@@ -1,4 +1,3 @@
-  
 """
 Asset stores all high level variables for Token assets this one user holds
 """
@@ -41,4 +40,27 @@ type User @entity {
     id: ID!
     "assets of the user"
     assets: [Asset!]! @derivedFrom(field: "owner")
+    "transaction of the user"
+    transactions: [Transaction!] @derivedFrom(field: "owner")
+}
+"""
+Transaction stores all tranfser events for the user of a specific token
+"""
+type Transaction @entity{
+    "id"
+     id:ID!
+    "date of transfer"
+     date: BigInt!
+    "transfer direction"
+     direction: String!
+     "transfer amount"
+     amount: BigDecimal!
+    "transfer transaction records"
+     owner: User!
+     "token ID"
+     tokenID: String!
+    "balance of after this transaction"
+     balance: BigDecimal!
+     "hash of this block"
+     hash: Bytes!
 }
