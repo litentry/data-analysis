@@ -25,6 +25,7 @@ https://thegraph.com/explorer/subgraph/moehringen
 
 # Example of Query
 1. Query all transactions of a wallet address for a spicific token,here token id is"wallet address-token contract address"
+    ```
     {
         transactions(where: {tokenID: "0x000000000000084e91743124a982076c59f10084-0xb59490ab09a0f526cc7305822ac65f2ab12f9723"}) {
         id
@@ -35,10 +36,12 @@ https://thegraph.com/explorer/subgraph/moehringen
         balance
         }
     }
+    ```
 
 2. Query the summary of a wallet address for a spicific token, here  id is"wallet address-token contract address"
+    ```
     {
-   assets(where:{id:"0x0000000000007f150bd6f54c40a34d7c3d5e9f56-0xb59490ab09a0f526cc7305822ac65f2ab12f9723"}) {
+    assets(where:{id:"0x0000000000007f150bd6f54c40a34d7c3d5e9f56-0xb59490ab09a0f526cc7305822ac65f2ab12f9723"}) {
     id
     name
     symbol
@@ -53,10 +56,12 @@ https://thegraph.com/explorer/subgraph/moehringen
     amountIn
     amountOut
      }
-   }
+    }
+    ```
 
 3. Query all the summay and transactions of all tokens the wallet address holds, here id is the wallet address
-     {
+   ```  
+{
   users(where: {id: "0x0168ac5760b2669d6fa0bd3046afef2db824f871"}) {
     id
     assets {
@@ -80,3 +85,4 @@ https://thegraph.com/explorer/subgraph/moehringen
     }
   }
 }
+```
