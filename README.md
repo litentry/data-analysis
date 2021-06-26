@@ -60,7 +60,9 @@ https://thegraph.com/explorer/subgraph/moehringen
     ```
 
 3. Query all the summay and transactions of all tokens the wallet address holds, here id is the wallet address
-   ```  
+  
+
+```  
 {
   users(where: {id: "0x0168ac5760b2669d6fa0bd3046afef2db824f871"}) {
     id
