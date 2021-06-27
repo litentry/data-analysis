@@ -17,7 +17,7 @@ following informaiton is availabel right now:
 https://api.thegraph.com/subgraphs/name/moehringen/erc20
 
 # Playgournd 
-https://thegraph.com/explorer/subgraph/moehringen
+https://thegraph.com/explorer/subgraph/moehringen/erc20
 
 # Currently support ERC20 Token
 1. Lit(Litentry)
