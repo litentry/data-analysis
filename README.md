@@ -2,6 +2,7 @@
 This project is built on the top of thegraph, used to index information of ERC20 token. 
 following informaiton is availabel right now: 
 
+For the entity "Asset", which contains an overview of a wallet address for a specific token,  following information can be retrieved:
 1. balance: balance of this token
 2. maxBalance:max balance of this wallet address for the given token
 3. countOut: Number of transfer totally for the given token
@@ -11,6 +12,15 @@ following informaiton is availabel right now:
 7. amountOut: amount of transfer out for the given token
 8. amountTotal: amount of transfer totally for the given token
 9. amountAver: average amount per transfer
+
+For the entity "Transaction", which contains the information of all transactions of a wallet address for a specific token,  following information can be retrieved:
+
+1. id: ID of this transacntion
+2. direction: incoming or outgoing
+3. amount: amount of this transaction
+4. balance: balance after this transaction 
+5. hash: hash 
+6. date: date of transaction happened 
 
 
 # Queries (HTTP)
@@ -22,6 +32,7 @@ https://thegraph.com/explorer/subgraph/moehringen/erc20
 # Currently support ERC20 Token
 1. Lit(Litentry)
 2. ATA(Automata)
+3. POLS(Polkastarter)
 
 # Example of Query
 1. Query all transactions of a wallet address for a spicific token,here token id is"wallet address-token contract address"
