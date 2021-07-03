@@ -4,6 +4,10 @@ Asset stores all high level variables for Token assets this one user holds
 type Asset @entity {
     "Owner address + token address"
     id: ID!
+    "token contract address"
+    contractAddress: String!
+    "wallet address"
+    walletAddress: String!
     "Name of the Token"
     name: String!
     "Token symbol"

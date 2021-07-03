@@ -56,6 +56,8 @@ function createAssetforUser(userID: string, tokenID:string): Asset {
   asset.countIn = BigInt.fromI32(0)
   asset.countOut = BigInt.fromI32(0)
   asset.countTotal = BigInt.fromI32(0)
+  asset.contractAddress = tokenID
+  asset.walletAddress = userID
   log.info("Asset created", [])  
   return asset
 }

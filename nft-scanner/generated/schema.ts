@@ -42,6 +42,24 @@ export class Asset extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get contractAddress(): string {
+    let value = this.get("contractAddress");
+    return value.toString();
+  }
+
+  set contractAddress(value: string) {
+    this.set("contractAddress", Value.fromString(value));
+  }
+
+  get walletAddress(): string {
+    let value = this.get("walletAddress");
+    return value.toString();
+  }
+
+  set walletAddress(value: string) {
+    this.set("walletAddress", Value.fromString(value));
+  }
+
   get name(): string {
     let value = this.get("name");
     return value.toString();
