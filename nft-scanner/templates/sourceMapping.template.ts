@@ -1,11 +1,27 @@
 import { log, BigInt, BigDecimal,Address } from '@graphprotocol/graph-ts';
-import { Asset, User,Transaction } from "../../generated/schema";
+import { Asset, User,Transaction,IDGenerator } from "../../generated/schema";
 import {
   Transfer,
   {{ contract_name }}
 } from '../../generated/{{ contract_name }}/{{ contract_name }}';
 
 let zeroBD = BigDecimal.fromString('0')
+const generaterID = "GENERATOR"
+
+function getID(): BigInt {
+  let generator = IDGenerator.load(generaterID)
+  if (generator == null) {
+    generator = new IDGenerator(generaterID)
+    generator.aID = BigInt.fromI32(0)
+    generator.save()
+    return generator.aID
+  }
+  else{
+    generator.aID =  generator.aID + BigInt.fromI32(1) 
+    generator.save()
+    return generator.aID
+  }
+}
 
 function createUser(
   userId: string
@@ -42,6 +58,7 @@ function createTransaction(userID: string, tokenID:string,event:Transfer,directi
 }
 function createAssetforUser(userID: string, tokenID:string): Asset {
   let asset = new Asset(userID.concat('-').concat(tokenID))
+  let aid:BigInt = getID()
   let contract =  {{ contract_name }}.bind(Address.fromString(tokenID))
   asset.decimals = contract.decimals() ? contract.decimals() : null
   asset.name = contract.name() ? contract.name() : null
@@ -58,6 +75,7 @@ function createAssetforUser(userID: string, tokenID:string): Asset {
   asset.countTotal = BigInt.fromI32(0)
   asset.contractAddress = tokenID
   asset.walletAddress = userID
+  asset.aID = aid
   log.info("Asset created", [])  
   return asset
 }
@@ -70,13 +88,6 @@ export function handleTransfer(event: Transfer): void {
   let assetID = userToID.concat('-').concat(tokenID)
   const sDirectionOut = "out"
   const sDirectionIn = "in"
-  
-  let asset = Asset.load(assetID)
-  if (asset == null) {
-    asset = createAssetforUser(userToID, tokenID)
-  }
-  let AssetDecimals = asset.decimals
-  let AssetDecimalsBD: BigDecimal = exponentToBigDecimal(AssetDecimals)
 
   // caculate the balance for from user
   if (userFromID != tokenID) {
@@ -85,10 +96,13 @@ export function handleTransfer(event: Transfer): void {
     if (UserFrom == null) {
       UserFrom = createUser(userFromID)
     }
+
     let UserStatsFrom = Asset.load(userFromID.concat('-').concat(tokenID))
     if (UserStatsFrom == null) {
       UserStatsFrom = createAssetforUser(userFromID, tokenID)
     }
+    let AssetDecimals = UserStatsFrom.decimals
+    let AssetDecimalsBD: BigDecimal = exponentToBigDecimal(AssetDecimals)
     UserStatsFrom.balance = UserStatsFrom.balance.minus(
       event.params.value
         .toBigDecimal()
@@ -146,6 +160,8 @@ export function handleTransfer(event: Transfer): void {
    if (UserStatsTo == null) {
      UserStatsTo = createAssetforUser(userToID, tokenID)
    }
+   let AssetDecimals = UserStatsTo.decimals
+   let AssetDecimalsBD: BigDecimal = exponentToBigDecimal(AssetDecimals)
    UserStatsTo.balance = UserStatsTo.balance.plus(
      event.params.value
        .toBigDecimal()

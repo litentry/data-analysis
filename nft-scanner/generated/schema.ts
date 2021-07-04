@@ -176,6 +176,15 @@ export class Asset extends Entity {
   set owner(value: string) {
     this.set("owner", Value.fromString(value));
   }
+
+  get aID(): BigInt {
+    let value = this.get("aID");
+    return value.toBigInt();
+  }
+
+  set aID(value: BigInt) {
+    this.set("aID", Value.fromBigInt(value));
+  }
 }
 
 export class User extends Entity {
@@ -326,5 +335,45 @@ export class Transaction extends Entity {
 
   set hash(value: Bytes) {
     this.set("hash", Value.fromBytes(value));
+  }
+}
+
+export class IDGenerator extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save IDGenerator entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save IDGenerator entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("IDGenerator", id.toString(), this);
+  }
+
+  static load(id: string): IDGenerator | null {
+    return store.get("IDGenerator", id) as IDGenerator | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get aID(): BigInt {
+    let value = this.get("aID");
+    return value.toBigInt();
+  }
+
+  set aID(value: BigInt) {
+    this.set("aID", Value.fromBigInt(value));
   }
 }

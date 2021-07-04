@@ -34,6 +34,8 @@ type Asset @entity {
     amountAver: BigDecimal!
     "relationship"
     owner: User!
+    "help to order when query"
+    aID: BigInt!
 }
 
 """
@@ -67,4 +69,14 @@ type Transaction @entity{
      balance: BigDecimal!
      "hash of this block"
      hash: Bytes!
+}
+
+"""
+IDGenerator is used to generate ID with asscending order, ID starts from BigInt(0)
+"""
+type IDGenerator @entity {
+    "id"
+    id: ID!
+    "asscending ID"
+    aID: BigInt!
 }
