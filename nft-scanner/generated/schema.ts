@@ -336,6 +336,24 @@ export class Transaction extends Entity {
   set hash(value: Bytes) {
     this.set("hash", Value.fromBytes(value));
   }
+
+  get to(): string {
+    let value = this.get("to");
+    return value.toString();
+  }
+
+  set to(value: string) {
+    this.set("to", Value.fromString(value));
+  }
+
+  get from(): string {
+    let value = this.get("from");
+    return value.toString();
+  }
+
+  set from(value: string) {
+    this.set("from", Value.fromString(value));
+  }
 }
 
 export class IDGenerator extends Entity {

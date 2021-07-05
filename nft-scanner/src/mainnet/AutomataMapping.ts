@@ -143,6 +143,8 @@ export function handleTransfer(event: Transfer): void {
     UserTransactionFrom.hash = event.block.hash
     log.info("Transaction finished", [])  
     UserTransactionFrom.balance = UserStatsFrom.balance
+    UserTransactionFrom.from = userFromID
+    UserTransactionFrom.to = userToID
 
     UserStatsFrom.save()
     UserTransactionFrom.save()
@@ -201,6 +203,8 @@ export function handleTransfer(event: Transfer): void {
     UserTransactionIn.owner = userToID
     UserTransactionIn.hash = event.block.hash
     UserTransactionIn.balance = UserStatsTo.balance
+    UserTransactionIn.from = userFromID
+    UserTransactionIn.to = userToID
 
     UserTransactionIn.save()
     UserStatsTo.save() 

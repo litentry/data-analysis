@@ -69,6 +69,10 @@ type Transaction @entity{
      balance: BigDecimal!
      "hash of this block"
      hash: Bytes!
+    "outgoing address"
+     to: String!
+    "incoming address"
+     from: String!
 }
 
 """
