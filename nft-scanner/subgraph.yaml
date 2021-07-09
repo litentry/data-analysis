@@ -45,12 +45,12 @@ dataSources:
           handler: handleTransfer
       file: ./src/mainnet/AutomataMapping.ts
   - kind: ethereum/contract
-    name: Pols
+    name: BNB
     network: mainnet
     source:
-      address: "0x83e6f1e41cdd28eaceb20cb649155049fac3d5aa"
-      abi: Pols
-      startBlock: 10953732
+      address: "0xb8c77482e45f1f44de1745f52c74426c631bdd52"
+      abi: BNB
+      startBlock: 3978343
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -59,9 +59,387 @@ dataSources:
         - Asset
         - User
       abis:
-        - name: Pols
-          file: ./abis/Pols.json
+        - name: BNB
+          file: ./abis/BNB.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mainnet/PolsMapping.ts
+      file: ./src/mainnet/BNBMapping.ts
+  - kind: ethereum/contract
+    name: LINK
+    network: mainnet
+    source:
+      address: "0x514910771af9ca656af840dff83e8264ecf986ca"
+      abi: LINK
+      startBlock: 4281611
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: LINK
+          file: ./abis/LINK.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256,bytes)
+          handler: handleTransfer
+      file: ./src/mainnet/LINKMapping.ts
+  - kind: ethereum/contract
+    name: WBTC
+    network: mainnet
+    source:
+      address: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      abi: WBTC
+      startBlock: 6766284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: WBTC
+          file: ./abis/WBTC.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/WBTCMapping.ts
+  - kind: ethereum/contract
+    name: TRON
+    network: mainnet
+    source:
+      address: "0xe1be5d3f34e89de342ee97e6e90d405884da6c67"
+      abi: TRON
+      startBlock: 12348841
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: TRON
+          file: ./abis/TRON.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/TRONMapping.ts
+  - kind: ethereum/contract
+    name: BitTorrent
+    network: mainnet
+    source:
+      address: "0xe83cccfabd4ed148903bf36d4283ee7c8b3494d1"
+      abi: BitTorrent
+      startBlock: 12295499
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: BitTorrent
+          file: ./abis/BitTorrent.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/BitTorrentMapping.ts
+  - kind: ethereum/contract
+    name: GRT
+    network: mainnet
+    source:
+      address: "0xc944e90c64b2c07662a292be6244bdf05cda44a7"
+      abi: GRT
+      startBlock: 11446769
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: GRT
+          file: ./abis/GRT.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/GRTMapping.ts
+  - kind: ethereum/contract
+    name: CHZ
+    network: mainnet
+    source:
+      address: "0x3506424f91fd33084466f402d5d97f05f8e3b4af"
+      abi: CHZ
+      startBlock: 6585593
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: CHZ
+          file: ./abis/CHZ.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/CHZMapping.ts
+  - kind: ethereum/contract
+    name: YFI
+    network: mainnet
+    source:
+      address: "0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e"
+      abi: YFI
+      startBlock: 10475744
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: YFI
+          file: ./abis/YFI.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/YFIMapping.ts
+  - kind: ethereum/contract
+    name: Synthetix
+    network: mainnet
+    source:
+      address: "0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f"
+      abi: Synthetix
+      startBlock: 8314597
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Synthetix
+          file: ./abis/Synthetix.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/SynthetixMapping.ts
+  - kind: ethereum/contract
+    name: Rarible
+    network: mainnet
+    source:
+      address: "0xfca59cd816ab1ead66534d82bc21e7515ce441cf"
+      abi: Rarible
+      startBlock: 10457021
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Rarible
+          file: ./abis/Rarible.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/RaribleMapping.ts
+  - kind: ethereum/contract
+    name: Dusk
+    network: mainnet
+    source:
+      address: "0x940a2db1b7008b6c776d4faaca729d6d4a4aa551"
+      abi: Dusk
+      startBlock: 6867115
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Dusk
+          file: ./abis/Dusk.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/DuskMapping.ts
+  - kind: ethereum/contract
+    name: Dock
+    network: mainnet
+    source:
+      address: "0xe5dada80aa6477e85d09747f2842f7993d0df71c"
+      abi: Dock
+      startBlock: 5127660
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Dock
+          file: ./abis/Dock.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/DockMapping.ts
+  - kind: ethereum/contract
+    name: STAKE
+    network: mainnet
+    source:
+      address: "0x0ae055097c6d159879521c384f1d2123d1f195e6"
+      abi: STAKE
+      startBlock: 9877421
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: STAKE
+          file: ./abis/STAKE.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256,bytes)
+          handler: handleTransfer
+      file: ./src/mainnet/STAKEMapping.ts
+  - kind: ethereum/contract
+    name: Mask
+    network: mainnet
+    source:
+      address: "0x69af81e73a73b40adf4f3d4223cd9b1ece623074"
+      abi: Mask
+      startBlock: 11886238
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Mask
+          file: ./abis/Mask.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/MaskMapping.ts
+  - kind: ethereum/contract
+    name: MXC
+    network: mainnet
+    source:
+      address: "0x5ca381bbfb58f0092df149bd3d243b08b9a8386e"
+      abi: MXC
+      startBlock: 6111735
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: MXC
+          file: ./abis/MXC.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/MXCMapping.ts
+  - kind: ethereum/contract
+    name: Ocean
+    network: mainnet
+    source:
+      address: "0x967da4048cd07ab37855c090aaf366e4ce1b9f48"
+      abi: Ocean
+      startBlock: 10945544
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Ocean
+          file: ./abis/Ocean.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/OceanMapping.ts
+  - kind: ethereum/contract
+    name: Balancer
+    network: mainnet
+    source:
+      address: "0xba100000625a3754423978a60c9317c58a424e3d"
+      abi: Balancer
+      startBlock: 10299683
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Balancer
+          file: ./abis/Balancer.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/BalancerMapping.ts
+  - kind: ethereum/contract
+    name: Loopring
+    network: mainnet
+    source:
+      address: "0xbbbbca6a901c926f240b89eacb641d8aec7aeafd"
+      abi: Loopring
+      startBlock: 7544036
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Loopring
+          file: ./abis/Loopring.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/LoopringMapping.ts
+  - kind: ethereum/contract
+    name: Matic
+    network: mainnet
+    source:
+      address: "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0"
+      abi: Matic
+      startBlock: 7605604
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Asset
+        - User
+      abis:
+        - name: Matic
+          file: ./abis/Matic.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mainnet/MaticMapping.ts
